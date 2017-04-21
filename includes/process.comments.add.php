@@ -1,11 +1,15 @@
 <?php
-if(isset($_POST['add-comment'])) {
-    if(empty($_POST['comment'])) {
-        echo "You cannot add empty comment!";
+include('session.start.php');
+
+if(empty($_POST['comment'])) {
+    echo "Please enter you comment first!";
+} else {
+    $comment = htmlspecialchars($_POST['comment']);
+    $article_id = $_POST['article_id'];
+    if(strlen($comment) > 500) {
+        echo "Comment is too long, it cannot contain more than 500 characters!";
     } else {
-        $comment = htmlspecialchars($_POST['comment']);
         $user_id = $_SESSION['user_id'];
-        $article_id = $article->article_id;
 
         require('connection.admin.php');
 
@@ -14,10 +18,10 @@ if(isset($_POST['add-comment'])) {
         $stmt->execute();
 
         if($stmt->errno != 0) {
-            danger_alert("An unknown error has occurred, please try again..");
+            echo "An unknown error has occurred, please try again..";
             $stmt->close();
         } else {
-            echo 'Comment successfully added!';
+            echo "Comment successfully added";
             $stmt->close();
         }
     }

@@ -22,7 +22,7 @@
 
             require('includes/connection.admin.php');
 
-            $stmt = $mysqli->prepare("SELECT user_id, username FROM user WHERE username = ? AND password = ?");
+            $stmt = $mysqli->prepare("SELECT user_id, username, rank_id FROM user WHERE username = ? AND password = ?");
             $stmt->bind_param("ss", $username, $password);
             $stmt->execute();
             $result = $stmt->get_result();

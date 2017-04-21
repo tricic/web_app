@@ -3,6 +3,7 @@ if(isset($_POST['register'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $gender = $_POST['gender'];
 
     include_once('includes/function.alerts.php');
     $errors = [];

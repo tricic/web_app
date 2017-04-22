@@ -1,5 +1,6 @@
 <?php
-    include('includes/session.start.php');
+    include('includes/class.session.php');
+    Session::check();
 ?>
 <!DOCTYPE html>
 <html lang="en">

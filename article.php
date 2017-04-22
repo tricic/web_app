@@ -1,5 +1,6 @@
 <?php
-    include('includes/session.start.php');
+    include('includes/class.session.php');
+    Session::check();
     require('includes/process.article.get.php');
 ?>
 <!DOCTYPE html>
@@ -64,7 +65,7 @@
             <!-- Comments -->
             <div id="comments" class="well">
                 <!-- Add comment -->
-                <?php if($logged) { ?>
+                <?php if(Session::check()) { ?>
                     <div class="row" id="add-comment">
                         <div class="col-xs-12">
                             <form method="POST">

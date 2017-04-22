@@ -1,3 +1,9 @@
+<?php
+    include_once('includes/class.session.php');
+    if(Session::check()) {
+        header("Location: index.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>

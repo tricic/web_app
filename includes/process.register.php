@@ -29,8 +29,8 @@ if(isset($_POST['register'])) {
         
         require('includes/connection.admin.php');
         
-        $stmt = $mysqli->prepare("INSERT INTO user(username, password, email, rank_id) VALUES (?, ?, ?, 3)");
-        $stmt->bind_param("sss", $username, $password, $email);
+        $stmt = $mysqli->prepare("INSERT INTO user(username, password, email, gender, rank_id) VALUES (?, ?, ?, ?, 3)");
+        $stmt->bind_param("ssss", $username, $password, $email, $gender);
         $stmt->execute();
         
         if($stmt->errno != 0) {

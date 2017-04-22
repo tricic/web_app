@@ -1,5 +1,6 @@
 <?php
-include('session.start.php');
+include_once('class.session.php');
+Session::check();
 
 $comment_id = $_POST['id'];
 

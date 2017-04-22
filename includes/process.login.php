@@ -1,4 +1,8 @@
 <?php
+    if(isset($_GET['notice'])) {
+        include_once('includes/function.alerts.php');
+        success_alert("You have been successfully registered and now you can login!");
+    }
     if(isset($_POST['login'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -29,7 +33,10 @@
 
             if($user = $result->fetch_object()) {
                 $stmt->close();
-                require('includes/session.create.php');
+                Session::create();
+                Session::set('user_id', $user->user_id);
+                Session::set('username', $user->username);
+                Session::set('rank_id', $user->rank_id);
                 header("Location: index.php");
             } else {
                 danger_alert("Username and password do not match!");

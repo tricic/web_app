@@ -1,5 +1,6 @@
 <?php
-include('session.start.php');
+include_once('class.session.php');
+Session::check();
 
 if(empty($_POST['comment'])) {
     echo "Please enter you comment first!";

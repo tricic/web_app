@@ -1,5 +1,6 @@
 <?php
-include('session.start.php');
+include_once('class.session.php');
+Session::check();
 
 require($_SERVER['DOCUMENT_ROOT'] . '/web_app/includes/connection.admin.php');
 if(!isset($article_id)) $article_id = $_GET['id'];

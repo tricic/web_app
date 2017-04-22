@@ -1,6 +1,6 @@
 <?php
-    include('includes/session.start.php');
-    if($logged) {
+    include_once('includes/class.session.php');
+    if(Session::check()) {
         header("Location: index.php");
     }
 ?>
@@ -32,10 +32,6 @@
                 <div class="col-sm-6 col-sm-offset-3">
                     <form method="POST" class="well">
                         <?php
-                            if(isset($_GET['notice'])) {
-                                include_once('includes/function.alerts.php');
-                                success_alert("You have been successfully registered and now you can login!");
-                            }
                             require('includes/process.login.php');
                         ?>
                         <div class="form-group">

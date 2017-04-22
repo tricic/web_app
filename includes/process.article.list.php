@@ -13,13 +13,13 @@ $result = $mysqli->query($query);
 echo '<div class="row">';
 while($article = $result->fetch_object()) {?>
     <div class="col-sm-3">
-        <a href="article.php?id=<?php echo $article->article_id ?>">
+        <a href="article.php?id=<?= $article->article_id ?>">
             <div class="thumbnail">
                 <img src="http://placehold.it/242x130?text=article" alt="placeholder">
                 <div class="caption">
-                    <h4><?php echo $article->title ?></h4>
-                    <p><?php echo $article->content_start ?>...</p>
-                    <small><?php echo $article->article_date ?></small>
+                    <h4><?= $article->title ?></h4>
+                    <p><?= $article->content_start ?>...</p>
+                    <small><?= $article->article_date ?></small>
                 </div>
             </div>
         </a>

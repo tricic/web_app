@@ -41,10 +41,10 @@
 				</div>
 			</form>
 			<?php 
-				if(!empty($_SESSION)) { if($_SESSION['rank_id'] < 3) echo '<button class="btn btn-danger navbar-btn">Button</button>'; 
+				if(!empty($_SESSION)) { if($_SESSION['rank_id'] < 3) echo '<button class="btn btn-danger navbar-btn">Panel</button>'; 
 			?>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="profile.php?username=<?php echo $_SESSION['username'] ?>"><span class="glyphicon glyphicon-user"></span> &nbsp<?php echo $_SESSION['username'] ?></a></li>
+					<li><a href="profile.php?username=<?= $_SESSION['username'] ?>"><span class="glyphicon glyphicon-user"></span> &nbsp<?= $_SESSION['username'] ?></a></li>
 					<li><a href="signoff.php"><span class="glyphicon glyphicon-log-in"></span> &nbspSign off</a></li>
 				</ul>
 				<?php } else {?>
@@ -92,7 +92,7 @@
     <?php if(!empty($_SESSION)) {
 			if($_SESSION['rank_id'] < 3) echo '<button class="btn btn-danger navbar-btn">Button</button>'; ?>
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href="profile.php?username=<?php echo $_SESSION['username'] ?>"><span class="glyphicon glyphicon-user"></span> &nbsp<?php echo $_SESSION['username'] ?></a></li>
+			<li><a href="profile.php?username=<?= $_SESSION['username'] ?>"><span class="glyphicon glyphicon-user"></span> &nbsp<?= $_SESSION['username'] ?></a></li>
 			<li><a href="signoff.php"><span class="glyphicon glyphicon-log-in"></span> &nbspSign off</a></li>
 		</ul>
     <?php } else {?>

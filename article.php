@@ -38,67 +38,69 @@
             <?php
                 if(isset($article)) {
             ?>
-            <article id="article" class="well">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h3><?php echo $article->title ?></h3>
-                        <p><?php echo $article->content ?></p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Article info bar -->
-            <div id="article-info" class="well well-sm">
-                <div class="row">
-                    <div class="col-xs-4">
-                        <small>Posted by: <a href="profile.php?username=<?php echo $article->username ?>"><?php echo $article->username ?></a></small>
-                    </div>
-                    <div class="col-xs-4">
-                        <small>Posted on: <?php echo $article->article_date ?></small>
-                    </div>
-                    <div class="col-xs-4">
-                        <small>Category: <?php echo $article->name ?></small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Comments -->
-            <div id="comments" class="well">
-                <!-- Add comment -->
-                <?php if(Session::check()) { ?>
-                    <div class="row" id="add-comment">
+                <article id="article" class="well">
+                    <div class="row">
                         <div class="col-xs-12">
-                            <form method="POST">
-                                <div class="form-group">
-                                    <label>Add comment:</label>
-                                    <textarea class="form-control" rows="3" name="comment" maxlength="500"></textarea>
-                                    <br>
-                                    <button type="button" class="btn btn-primary" style="width: 30%;" onclick="ajax_add_comment(document.getElementsByTagName('textarea')[0].value, <?php echo $article->article_id ?>); ajax_comments(<?php echo $article->article_id ?>); document.getElementsByTagName('textarea')[0].value = ''"><strong>Submit</strong></button>
-                                    <?php
-                                        // include('includes/process.comments.add.php');
-                                    ?>
-                                </div>
-                            </form>
+                            <h3><?= $article->title ?></h3>
+                            <p><?= $article->content ?></p>
                         </div>
                     </div>
-                <?php
-                    } else {
-                        include_once('includes/function.alerts.php');
-                        info_alert("You must login or register to add a comment!");
-                    }
-                ?>
+                </article>
 
-                <!-- Comments list -->
-                <div id="comments-list">
-                    <!-- ajax_comments fills this div with comments -->
-                    <div style="text-align: center;">
-                        <img src="http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_gray_128.gif" alt="loader">
+                <!-- Article info bar -->
+                <div id="article-info" class="well well-sm">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <small>Posted by: <a href="profile.php?username=<?= $article->username ?>"><?= $article->username ?></a></small>
+                        </div>
+                        <div class="col-xs-4">
+                            <small>Posted on: <?= $article->article_date ?></small>
+                        </div>
+                        <div class="col-xs-4">
+                            <small>Category: <?= $article->name ?></small>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+                <!-- Comments -->
+                <div id="comments" class="well">
+                    <!-- Add comment -->
+                    <?php if(Session::check()) { ?>
+                        <div class="row" id="add-comment">
+                            <div class="col-xs-12">
+                                <form method="POST">
+                                    <div class="form-group">
+                                        <label>Add comment:</label>
+                                        <textarea class="form-control" rows="3" name="comment" maxlength="500"></textarea>
+                                        <br>
+                                        <button type="button" class="btn btn-primary" style="width: 30%;" onclick="ajax_add_comment(document.getElementsByTagName('textarea')[0].value, <?= $article->article_id ?>); ajax_comments(<?= $article->article_id ?>); document.getElementsByTagName('textarea')[0].value = ''"><strong>Submit</strong></button>
+                                        <?php
+                                            // include('includes/process.comments.add.php');
+                                        ?>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    <?php
+                        } else {
+                            include_once('includes/function.alerts.php');
+                            info_alert("You must login or register to add a comment!");
+                        }
+                    ?>
+
+                    <!-- Comments list -->
+                    <div id="comments-list">
+                        <!-- ajax_comments fills this div with comments -->
+                        <div style="text-align: center;">
+                            <img src="http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_gray_128.gif" alt="loader">
+                        </div>
+                    </div>
+                </div>
             <!-- Closing curly bracket of if(isset($article)) -->
             <?php
+                } else {
+                    include_once('includes/function.alerts.php');
+                    danger_alert("Article not found!");
                 }
             ?>
         </div>

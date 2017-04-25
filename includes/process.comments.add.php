@@ -11,6 +11,7 @@ if(empty($_POST['comment'])) {
     exit("Comment is too long, it cannot contain more than 500 characters!");
 } else {
     require('connection.admin.php');
+    
     $user_id = $_SESSION['user_id'];
 
     $stmt = $mysqli->prepare("INSERT INTO comment (user_id, article_id, content) VALUES($user_id, $article_id, ?)");

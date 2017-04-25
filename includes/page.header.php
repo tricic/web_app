@@ -19,13 +19,13 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">News</a></li>
-						<li><a href="#">Sport</a></li>
-						<li><a href="#">Politics</a></li>
-						<li><a href="#">IT &amp Technology</a></li>
+						<li><a href="category.php?id=1">News</a></li>
+						<li><a href="category.php?id=2">Sport</a></li>
+						<li><a href="category.php?id=3">Politics</a></li>
+						<li><a href="category.php?id=4">IT &amp Technology</a></li>
 						<!--<li role="separator" class="divider"></li>-->
-						<li><a href="#">Magazine</a></li>
-						<li><a href="#">Health</a></li>
+						<li><a href="category.php?id=5">Magazine</a></li>
+						<li><a href="category.php?id=6">Health</a></li>
 					</ul>
 				</li>
 				<li><a href="#">Statistics</a></li>
@@ -41,7 +41,7 @@
 				</div>
 			</form>
 			<?php 
-				if(!empty($_SESSION)) { if($_SESSION['rank_id'] < 3) echo '<button class="btn btn-danger navbar-btn">Panel</button>'; 
+				if(!empty($_SESSION)) { if($_SESSION['rank_id'] < 3) echo '<a href="panel/" style="inline-block"><button class="btn btn-danger navbar-btn">Panel</button></a>'; 
 			?>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="profile.php?username=<?= $_SESSION['username'] ?>"><span class="glyphicon glyphicon-user"></span> &nbsp<?= $_SESSION['username'] ?></a></li>

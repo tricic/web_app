@@ -1,5 +1,7 @@
 <?php
     include_once('includes/class.session.php');
+    include_once('includes/class.alert.php');
+    
     if(Session::check()) {
         header("Location: index.php");
     }

@@ -1,12 +1,18 @@
 <?php
-    include('includes/class.session.php');
+    include_once('includes/class.session.php');
+    require_once('includes/class.article.php');
+    include_once('includes/class.alert.php');
+
     Session::check();
-    require('includes/process.article.get.php');
+
+    $article_id = $_GET['id'];
+    $article = Article::getArticleById($article_id);
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title><?php if(isset($article)) echo $article->title; else echo "Article not found!"; ?></title>
+        <title><?php if($article) echo $article['title']; else echo "Article not found..."; ?></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -36,13 +42,13 @@
         <div class="container">
             <!-- Article -->
             <?php
-                if(isset($article)) {
+                if($article) {
             ?>
                 <article id="article" class="well">
                     <div class="row">
                         <div class="col-xs-12">
-                            <h3><?= $article->title ?></h3>
-                            <p><?= $article->content ?></p>
+                            <h3><?= $article['title'] ?></h3>
+                            <p><?= $article['content'] ?></p>
                         </div>
                     </div>
                 </article>
@@ -51,13 +57,13 @@
                 <div id="article-info" class="well well-sm">
                     <div class="row">
                         <div class="col-xs-4">
-                            <small>Posted by: <a href="profile.php?username=<?= $article->username ?>"><?= $article->username ?></a></small>
+                            <small>Posted by: <a href="profile.php?username=<?= $article['username'] ?>"><?= $article['username'] ?></a></small>
                         </div>
                         <div class="col-xs-4">
-                            <small>Posted on: <?= $article->article_date ?></small>
+                            <small>Posted on: <?= $article['article_date'] ?></small>
                         </div>
                         <div class="col-xs-4">
-                            <small>Category: <?= $article->name ?></small>
+                            <small>Category: <?= $article['name'] ?></small>
                         </div>
                     </div>
                 </div>
@@ -83,8 +89,7 @@
                         </div>
                     <?php
                         } else {
-                            include_once('includes/function.alerts.php');
-                            info_alert("You must login or register to add a comment!");
+                            Alert::info("You must login or register to add a comment!");
                         }
                     ?>
 
@@ -95,14 +100,14 @@
                             <img src="http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_gray_128.gif" alt="loader">
                         </div>
                     </div>
-                </div>
+                </div> <!-- /#comments -->
+
             <!-- Closing curly bracket of if(isset($article)) -->
             <?php
                 } else {
-                    include_once('includes/function.alerts.php');
-                    danger_alert("Article not found!");
+                    Alert::danger("Article not found!");
                 }
             ?>
-        </div>
+        </div> <!-- /.container -->
     </body>
 </html>

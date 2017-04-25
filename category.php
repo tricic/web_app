@@ -1,15 +1,17 @@
 <?php
     include_once('includes/class.session.php');
-    include_once('includes/class.alert.php');
     require_once('includes/class.article.php');
+    include_once('includes/class.alert.php');
 
     Session::check();
+
+    $result = Article::getArticlesByCategoryId($_GET['id']);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Search: <?= $_GET['text'] ?></title>
+        <title><?php if($result) echo $result[0]['category_name']; else echo "Invalid category..." ?></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -37,18 +39,12 @@
         ?>
         <div class="container">
             <?php
-                $text = $_GET['text'];
-
-                if(strlen($text) < 3) {
-                    Alert::warning("You must enter at least 3 characters to search articles!");
-                } else {
-                    if($result = Article::getArticlesBySearch($text)) {
-                        foreach($result as $article) {
-                            Article::outputRow($article);
-                        }
-                    } else {
-                        Alert::warning("No articles found!");
+                if($result) {
+                    foreach($result as $article) {
+                        Article::outputRow($article);
                     }
+                } else {
+                    Alert::warning("No articles found!");
                 }
             ?>
         </div>

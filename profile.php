@@ -1,12 +1,16 @@
 <?php
-    include('includes/class.session.php');
+    include_once('includes/class.session.php');
+    require_once('includes/class.user.php');
+    include_once('includes/class.alert.php');
+
     Session::check();
-    include('includes/process.profile.php');
+
+    $user = User::getUserByUsername($_GET['username']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title><?php if(isset($user)) echo $user->username; else echo "User not found..."; ?></title>
+        <title><?php if($user) echo $user['username']; else echo "User not found..."; ?></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -33,23 +37,22 @@
         ?>
         <div class="container">
             <?php
-                if(isset($user)) {
+                if($user) {
             ?>  
             <div id="profile"class="row">
                 <div class="col-xs-8 col-xs-offset-2 col-md-6 col-md-offset-3 well">
-                        <img src="images/<?= $user->gender ?>_avatar.png" class="img-circle">
+                        <img src="images/<?= $user['gender'] ?>_avatar.png" class="img-circle">
                         <div id="profile-info">
-                            <p><strong>ID:</strong> <?= $user->user_id ?></p>
-                            <p><strong>Username:</strong> <?= $user->username ?></p>
-                            <p><strong>Rank:</strong> <?= $user->rank ?></p>
-                            <p><strong>Joined:</strong> <?= $user->reg_date ?></p>
+                            <p><strong>ID:</strong> <?= $user['user_id'] ?></p>
+                            <p><strong>Username:</strong> <?= $user['username'] ?></p>
+                            <p><strong>Rank:</strong> <?= $user['rank'] ?></p>
+                            <p><strong>Joined:</strong> <?= $user['reg_date'] ?></p>
                         </div>
                 </div>
             </div>
             <?php
                 } else {
-                    include_once('includes/function.alerts.php');
-                    danger_alert("User not found!");
+                    Alert::danger("User not found!");
                 }
             ?>
         </div>

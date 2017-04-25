@@ -1,6 +1,10 @@
 <?php
     include_once('includes/class.session.php');
+    require_once('includes/class.article.php');
+    include_once('includes/class.alert.php');
+
     Session::check();
+
 ?>
 
 <!DOCTYPE html>
@@ -12,8 +16,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="js/ajax.articles.js"></script>
-        <script src="js/functions.js"></script>
         <style>
             body {
                 background-color: gray;
@@ -22,25 +24,17 @@
             a h4 {
                 color: black;
             }
-            main {
-                padding-left: 0px;
-                padding-right: 0px;
-            }
             main a:hover {
                 text-decoration: none;
             }
-            div.container {
-                padding-left: 0px;
-                padding-right: 0px;
-            }
         </style>
     </head>
-    <body onload="load_articles()">
+    <body>
         <?php
             include('includes/page.header.php');
         ?>
         <div class="container well">
-            <main class="col-sm-9">
+            <main>
                 <!-- Last news -->
                 <div class="panel panel-success">
                     <div class="panel-heading">
@@ -48,6 +42,14 @@
                     </div>
                 </div>
                 <div id="last-news">
+                    <div class="row">
+                    <?php
+                        $result = Article::getArticlesByCategoryId(1, 4);
+                        foreach($result as $article) {
+                            Article::outputThumbnail($article);
+                        }
+                    ?>
+                    </div>
                 </div>
 
                 <!-- Last sport -->
@@ -57,6 +59,14 @@
                     </div>
                 </div>
                 <div id="last-sport">
+                    <div class="row">
+                    <?php
+                        $result = Article::getArticlesByCategoryId(2, 4);
+                        foreach($result as $article) {
+                            Article::outputThumbnail($article);
+                        }
+                    ?>
+                    </div>
                 </div>
 
                 <!-- Last politics -->
@@ -66,6 +76,14 @@
                     </div>
                 </div>
                 <div id="last-politics">
+                    <div class="row">
+                    <?php
+                        $result = Article::getArticlesByCategoryId(3, 4);
+                        foreach($result as $article) {
+                            Article::outputThumbnail($article);
+                        }
+                    ?>
+                    </div>
                 </div>
 
                 <!-- Last tech -->
@@ -75,15 +93,16 @@
                     </div>
                 </div>
                 <div id="last-tech">
-                </div>
-            </main>
-            <aside class="col-sm-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Last articles</h3>
+                    <div class="row">
+                    <?php
+                        $result = Article::getArticlesByCategoryId(4, 4);
+                        foreach($result as $article) {
+                            Article::outputThumbnail($article);
+                        }
+                    ?>
                     </div>
                 </div>
-            </aside>
+            </main>
         </div>
     </body>
 </html>

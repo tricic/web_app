@@ -1,9 +1,12 @@
 <?php
 include_once('class.session.php');
+include_once('includes/class.alert.php');
+
 Session::check();
 
 require($_SERVER['DOCUMENT_ROOT'] . '/web_app/includes/connection.admin.php');
-if(!isset($article_id)) $article_id = $_GET['id'];
+
+$article_id = $_GET['id'];
 
 $query =    "SELECT comment.comment_id, comment.content, comment.comment_date, user.username, user.rank_id, user.gender FROM comment
             JOIN user ON comment.article_id = $article_id AND user.user_id = comment.user_id
@@ -39,5 +42,5 @@ if($result->num_rows) {
     }
 } else {
     include_once($_SERVER['DOCUMENT_ROOT'] . '/web_app/includes/function.alerts.php');
-    info_alert("No comments on this article!");
+    Alert::info("No comments on this article!");
 }

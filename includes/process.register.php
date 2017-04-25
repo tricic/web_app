@@ -5,7 +5,6 @@ if(isset($_POST['register'])) {
     $password = $_POST['password'];
     $gender = $_POST['gender'];
 
-    include_once('includes/function.alerts.php');
     $errors = [];
 
     if(empty($username)) {
@@ -23,7 +22,7 @@ if(isset($_POST['register'])) {
     }
 
     if(sizeof($errors) > 0) {
-        danger_alert($errors);
+        Alert::danger($errors);
     } else {
         $password = md5($_POST['password']); // Empty password would not be empty after md5 hash
         
@@ -35,9 +34,9 @@ if(isset($_POST['register'])) {
         
         if($stmt->errno != 0) {
             if($stmt->errno == 1062) {
-                danger_alert("Username is already registered!");
+                Alert::danger("Username is already registered!");
             } else {
-                danger_alert("An unknown error has occurred, please try again..");
+                Alert::danger("An unknown error has occurred, please try again..");
             }
             $stmt->close();
         } else {

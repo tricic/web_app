@@ -1,7 +1,7 @@
 <?php
-    include_once('includes/class.session.php');
-    require_once('includes/class.article.php');
-    include_once('includes/class.alert.php');
+    include_once('includes/classes/session.class.php');
+    require_once('includes/classes/article.class.php');
+    include_once('includes/classes/alert.class.php');
 
     Session::check();
 
@@ -37,7 +37,7 @@
     </head>
     <body onload="ajax_comments(<?php if(isset($article_id)) echo $article_id ?>);">
         <?php
-            include('includes/page.header.php');
+            include('includes/header.php');
         ?>
         <div class="container">
             <!-- Article -->
@@ -63,7 +63,7 @@
                             <small>Posted on: <?= $article['article_date'] ?></small>
                         </div>
                         <div class="col-xs-4">
-                            <small>Category: <?= $article['name'] ?></small>
+                            <small>Category: <a href="category.php?id=<?= $article['category_id'] ?>"><?= $article['name'] ?></a></small>
                         </div>
                     </div>
                 </div>
@@ -79,10 +79,7 @@
                                         <label>Add comment:</label>
                                         <textarea class="form-control" rows="3" name="comment" maxlength="500"></textarea>
                                         <br>
-                                        <button type="button" class="btn btn-primary" style="width: 30%;" onclick="ajax_add_comment(document.getElementsByTagName('textarea')[0].value, <?= $article->article_id ?>); ajax_comments(<?= $article->article_id ?>); document.getElementsByTagName('textarea')[0].value = ''"><strong>Submit</strong></button>
-                                        <?php
-                                            // include('includes/process.comments.add.php');
-                                        ?>
+                                        <button type="button" class="btn btn-primary" style="width: 30%;" onclick="ajax_add_comment(document.getElementsByTagName('textarea')[0].value, <?= $article['article_id'] ?>); ajax_comments(<?= $article['article_id'] ?>); document.getElementsByTagName('textarea')[0].value = ''"><strong>Submit</strong></button>
                                     </div>
                                 </form>
                             </div>

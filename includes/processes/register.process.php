@@ -1,4 +1,6 @@
 <?php
+require_once('includes/classes/database.class.php');
+
 if(isset($_POST['register'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
@@ -26,9 +28,9 @@ if(isset($_POST['register'])) {
     } else {
         $password = md5($_POST['password']); // Empty password would not be empty after md5 hash
         
-        require('includes/connection.admin.php');
+        Database::checkConnection();
         
-        $stmt = $mysqli->prepare("INSERT INTO user(username, password, email, gender, rank_id) VALUES (?, ?, ?, ?, 3)");
+        $stmt = Database::$conn->prepare("INSERT INTO user(username, password, email, gender, rank_id) VALUES (?, ?, ?, ?, 3)");
         $stmt->bind_param("ssss", $username, $password, $email, $gender);
         $stmt->execute();
         

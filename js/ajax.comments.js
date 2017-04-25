@@ -9,14 +9,14 @@ function ajax_comments(id) {
             document.getElementById("comments-list").innerHTML = xhr.responseText;
         }
     }
-    xhr.open("GET", "includes/process.comments.php?id=" + id, true);
+    xhr.open("GET", "includes/processes/comment-printer.process.php?id=" + id, true);
     xhr.send(null);
 }
 
 function ajax_remove_comment(id, username) {
     var xhr = new XMLHttpRequest();
 
-    xhr.open("POST", "includes/process.comments.remove.php", true);
+    xhr.open("POST", "includes/processes/comment-delete.process.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function() {
@@ -30,7 +30,7 @@ function ajax_remove_comment(id, username) {
 function ajax_add_comment(comment, article_id) {
     var xhr = new XMLHttpRequest();
 
-    xhr.open("POST", "includes/process.comments.add.php", true);
+    xhr.open("POST", "includes/processes/comment-add.process.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function() {

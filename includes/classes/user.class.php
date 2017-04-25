@@ -1,5 +1,5 @@
 <?php
-require('class.database.php');
+require('database.class.php');
 
 class User extends Database {
     public static function getUserByUsername($username) {

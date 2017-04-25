@@ -1,7 +1,7 @@
 <?php
-    include_once('includes/class.session.php');
-    include_once('includes/class.alert.php');
-    require_once('includes/class.article.php');
+    include_once('includes/classes/session.class.php');
+    include_once('includes/classes/alert.class.php');
+    require_once('includes/classes/article.class.php');
 
     Session::check();
 ?>
@@ -33,7 +33,7 @@
     </head>
     <body>
         <?php
-            include('includes/page.header.php');
+            include('includes/header.php');
         ?>
         <div class="container">
             <?php

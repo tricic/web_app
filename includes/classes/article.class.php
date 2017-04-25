@@ -1,11 +1,11 @@
 <?php
-require('class.database.php');
+require_once('database.class.php');
 
 class Article extends Database {
 
     // Queries
     public static function getArticleById($id) {
-        $query = "SELECT article.article_id, article.title, article.content, article.article_date, user.username, category.name 
+        $query = "SELECT article.article_id, article.title, article.content, article.article_date, user.username, category.name, category.category_id 
                   FROM article
                   JOIN user ON article_id = $id AND article.user_id = user.user_id
                   JOIN category ON article.category_id = category.category_id;";
@@ -21,15 +21,13 @@ class Article extends Database {
         if($limit) {
             $query = "SELECT article_id, title, SUBSTR(content, 1, 80) AS content_intro, article_date, category.name AS category_name 
                       FROM article 
-                      JOIN category
-                      WHERE article.category_id = $category_id AND category.category_id = $category_id 
+                      JOIN category ON article.category_id = $category_id AND category.category_id = $category_id 
                       ORDER BY article_date DESC 
                       LIMIT $limit";
         } else {
             $query = "SELECT article_id, title, SUBSTR(content, 1, 80) AS content_intro, article_date, category.name AS category_name 
                       FROM article 
-                      JOIN category
-                      WHERE article.category_id = $category_id AND category.category_id = $category_id 
+                      JOIN category ON article.category_id = $category_id AND category.category_id = $category_id 
                       ORDER BY article_date DESC";
         }
 

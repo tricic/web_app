@@ -1,6 +1,6 @@
 <?php
-    include_once('includes/class.session.php');
-    include_once('includes/class.alert.php');
+    include_once('includes/classes/session.class.php');
+    include_once('includes/classes/alert.class.php');
     
     if(Session::check()) {
         header("Location: index.php");
@@ -27,14 +27,14 @@
     </head>
     <body>
         <?php
-            include('includes/page.header.php');
+            include('includes/header.php');
         ?>
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                     <form method="POST" class="well">
                         <?php
-                            require('includes/process.login.php');
+                            require('includes/processes/login.process.php');
                         ?>
                         <div class="form-group">
                             <label>Username:</label>

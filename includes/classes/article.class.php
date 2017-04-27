@@ -3,9 +3,29 @@ require_once('database.class.php');
 
 class Article extends Database {
 
+    public static function insert($user_id, $category_id, $img_url, $title, $content) {
+        $query = "INSERT INTO article (user_id, category_id, img_url, title, content) VALUES ($user_id, $category_id, '$img_url', '$title', '$content')";
+
+        if(self::queryExec($query)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function delete($id) {
+        $query = "DELETE FROM article WHERE article_id = $id";
+
+        if(self::queryExec($query)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // Queries
     public static function getArticleById($id) {
-        $query = "SELECT article.article_id, article.title, article.content, article.article_date, user.username, category.name, category.category_id 
+        $query = "SELECT article.article_id, article.title, article.content, article.img_url, article.article_date, user.username, category.name, category.category_id 
                   FROM article
                   JOIN user ON article_id = $id AND article.user_id = user.user_id
                   JOIN category ON article.category_id = category.category_id;";
@@ -19,13 +39,13 @@ class Article extends Database {
 
     public static function getArticlesByCategoryId($category_id, $limit = false) {
         if($limit) {
-            $query = "SELECT article_id, title, SUBSTR(content, 1, 80) AS content_intro, article_date, category.name AS category_name 
+            $query = "SELECT article_id, title, SUBSTR(content, 1, 80) AS content_intro, img_url, article_date, category.name AS category_name 
                       FROM article 
                       JOIN category ON article.category_id = $category_id AND category.category_id = $category_id 
                       ORDER BY article_date DESC 
                       LIMIT $limit";
         } else {
-            $query = "SELECT article_id, title, SUBSTR(content, 1, 80) AS content_intro, article_date, category.name AS category_name 
+            $query = "SELECT article_id, title, SUBSTR(content, 1, 80) AS content_intro, img_url, article_date, category.name AS category_name 
                       FROM article 
                       JOIN category ON article.category_id = $category_id AND category.category_id = $category_id 
                       ORDER BY article_date DESC";
@@ -39,7 +59,7 @@ class Article extends Database {
     }
 
     public static function getArticlesBySearch($s) {
-        $query = "SELECT article_id, title, article_date 
+        $query = "SELECT article_id, title, img_url, article_date 
                   FROM article 
                   WHERE title LIKE '%$s%' 
                   ORDER BY article_date DESC";
@@ -57,7 +77,7 @@ class Article extends Database {
         <div class="col-sm-3">
             <a href="article.php?id=<?= $article['article_id'] ?>">
                 <div class="thumbnail">
-                    <img src="http://placehold.it/242x130?text=article" alt="placeholder">
+                    <img src="<?= $article['img_url'] ?>" alt="placeholder" class="img-rounded">
                     <div class="caption">
                         <h4><?= $article['title'] ?></h4>
                         <p><?= $article['content_intro'] ?>...</p>
@@ -70,16 +90,17 @@ class Article extends Database {
     }
 
     public static function outputRow($article) { ?>
-        <div class="row">
-            <div class="col-xs-12">
-                <a href="article.php?id=<?= $article['article_id'] ?>">
-                    <div class="well well-sm">
+        <a href="article.php?id=<?= $article['article_id'] ?>">
+            <div class="row well well-sm">
+                <div class="col-xs-2">
+                    <img src="<?= $article['img_url'] ?>" alt="placeholder" class="img-rounded" style="height: 100px;">
+                </div>
+                <div class="col-xs-10">
                         <h4><?= $article['title'] ?></h4>
                         <span>- <?= $article['article_date']?><span>
-                    </div>
-                </a>
+                </div>
             </div>
-        </div>
+        </a>
     <?php
     }
 }

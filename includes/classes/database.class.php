@@ -37,11 +37,9 @@ class Database {
 
     public static function queryExec($query) {
         self::checkConnection();
-
-        self::$conn->query($query);
-
+        
         // DELETE will return TRUE even if row does not exist, therefore we need to check affected rows to be sure row is ACTUALLY deleted
-        if(self::$conn->affected_rows) {
+        if(self::$conn->query($query) && self::$conn->affected_rows) {
             return true;
         } else {
             return false;

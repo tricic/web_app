@@ -24,8 +24,7 @@ class Comment extends Database {
     }
 
     public static function delete($id) {
-        $query = "DELETE FROM comment
-                  WHERE comment_id = $id";
+        $query = "DELETE FROM comment WHERE comment_id = $id";
 
         if(self::queryExec($query)) {
             return true;
@@ -36,10 +35,32 @@ class Comment extends Database {
 
     public static function getCommentsByArticleId($id) {
         $query = "SELECT comment.comment_id, comment.content, comment.comment_date, user.username, user.rank_id, user.gender 
-                 FROM comment
-                 JOIN user ON comment.article_id = $id AND user.user_id = comment.user_id
-                 ORDER BY comment.comment_date DESC";
+                  FROM comment
+                  JOIN user ON comment.article_id = $id AND user.user_id = comment.user_id
+                  ORDER BY comment.comment_date DESC";
         
+        if($result = self::queryResult($query)) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+    public static function getCommentsBySearch($text, $username = false) {
+        $query = "";
+
+        if($username) {
+            require_once('user.class.php');
+
+            if(!$user_id = User::usernameToId($username)) {
+                return false;
+            }
+
+            $query = "SELECT * FROM comment WHERE user_id = $user_id AND content LIKE '%$text%'";
+        } else {
+            $query = "SELECT * FROM comment WHERE content LIKE '%$text%'";
+        }
+
         if($result = self::queryResult($query)) {
             return $result;
         } else {

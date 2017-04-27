@@ -22,7 +22,7 @@ class Session {
         if(!empty($_SESSION)) {
             return true;
         } else {
-            session_destroy();
+            @session_destroy();
             return false;
         }
     }

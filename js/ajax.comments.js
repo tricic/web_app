@@ -40,3 +40,18 @@ function ajax_add_comment(comment, article_id) {
     }
     xhr.send("comment=" + comment + "&article_id=" + article_id);
 }
+
+function ajax_search_comments(text, username) {
+    console.log(username);
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("POST", "../includes/processes/comment-search.process.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function() {
+        if(xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById('search-result').innerHTML = xhr.responseText;
+        }
+    }
+    xhr.send("text=" + text + "&username=" + username);
+}

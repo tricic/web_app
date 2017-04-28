@@ -1,8 +1,8 @@
 <?php
-if(isset($_POST['submit'])) {
+if(isset($_POST['update'])) {
     require_once('../includes/classes/article.class.php');
 
-    $user_id = $_POST['user_id'];
+    $article_id = $_POST['article_id'];
     $category_id = $_POST['category_id'];
     $img_url = $_POST['img_url'];
     $title = $_POST['title'];
@@ -10,7 +10,7 @@ if(isset($_POST['submit'])) {
 
     $success = false;
     
-    if(Article::insert($user_id, $category_id, $img_url, $title, $content)) {
+    if(Article::update($article_id, $category_id, $img_url, $title, $content)) {
         $success = true;
     } else {
         Alert::danger(Article::$error);

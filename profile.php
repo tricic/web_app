@@ -40,14 +40,14 @@
                 if($user) {
             ?>  
             <div id="profile"class="row">
-                <div class="col-xs-8 col-xs-offset-2 col-md-6 col-md-offset-3 well">
-                        <img src="images/<?= $user['gender'] ?>_avatar.png" class="img-circle">
-                        <div id="profile-info">
-                            <p><strong>ID:</strong> <?= $user['user_id'] ?></p>
-                            <p><strong>Username:</strong> <?= $user['username'] ?></p>
-                            <p><strong>Rank:</strong> <?= $user['rank'] ?></p>
-                            <p><strong>Joined:</strong> <?= $user['reg_date'] ?></p>
-                        </div>
+                <div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 well">
+                    <img src="images/<?= $user['gender'] ?>_avatar.png" class="img-circle">
+                    <div id="profile-info">
+                        <p><strong>ID:</strong> <?= $user['user_id'] ?></p>
+                        <p><strong>Username:</strong> <?= $user['username'] ?></p>
+                        <p><strong>Rank:</strong> <?= $user['rank'] ?></p>
+                        <p><strong>Joined:</strong> <?= $user['reg_date'] ?></p>
+                    </div>
                 </div>
             </div>
             <?php

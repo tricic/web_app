@@ -26,8 +26,8 @@
 
     <!-- Libs -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <style>
         body {
@@ -43,19 +43,18 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <?php
-                    if(isset($success)) {
-                        if($success) {
-                            Alert::success("New article successfully added!");
-                        } else {
-                            Alert::danger("Failure while inserting the article!");
-                        }
-                    }
-                ?>
-
                 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="margin-bottom: 10px;">Toggle Menu</a>
                 <div class="row">
                     <div class="col-lg-12">
+                        <?php
+                            if(isset($success)) {
+                                if($success) {
+                                    Alert::success("New article successfully added!");
+                                } else {
+                                    Alert::danger("Error while inserting the article!");
+                                }
+                            }
+                        ?>
                         <form method="POST" class="well">
                             <div class="form-group">
                                 <label for="category">Category:</label>

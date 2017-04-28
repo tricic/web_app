@@ -11,6 +11,8 @@
     require_once('../includes/classes/alert.class.php');
     require_once('../includes/classes/category.class.php');
     require_once('../includes/classes/article.class.php');
+    require('../includes/processes/article-update.process.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,20 +48,19 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <?php
-                    if(isset($success)) {
-                        if($success) {
-                            Alert::success("Article successfully updated!");
-                        } else {
-                            Alert::danger("Failure while updating the article!");
-                        }
-                    }
-                ?>
 
                 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="margin-bottom: 10px;">Toggle Menu</a>
                 <div class="row">
                     <div class="col-lg-12">
                         <?php
+                            if(isset($success)) {
+                                if($success) {
+                                    Alert::success("Article successfully updated!");
+                                } else {
+                                    Alert::danger("Error while updating the article!");
+                                }
+                            }
+
                             if(isset($_GET['id'])) {
                                 if($article = Article::getArticleById($_GET['id'])) {
                                     ?>
@@ -82,9 +83,9 @@
                                             <label>Content:</label>
                                             <textarea class="form-control" rows="20" name="content" placeholder="Enter content here..."><?= $article['content'] ?></textarea>
                                         </div>
-                                        <input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
+                                        <input type="hidden" name="article_id" value="<?= $article['article_id'] ?>">
                                         
-                                        <input type="submit" name="submit" value="Update article" class="btn btn-primary btn-block">
+                                        <input type="submit" name="update" value="Update article" class="btn btn-primary btn-block">
                                     </form>
                                     <?php
                                 } else {
@@ -97,7 +98,7 @@
                                     <label>Article ID:</label>
                                     <input type="number" name="id" placeholder="Enter article ID" class="form-control" required>
                                     <br>
-                                    <input type="submit" value="Submit" class="btn btn-primary btn-block">
+                                    <input type="submit" value="Edit article" class="btn btn-primary btn-block">
                                 </div> 
                             </form>
 

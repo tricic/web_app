@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
-    <title>Admin Panel</title>
+    <title>Admin Panel | Dashboard</title>
 
     <!-- Custom CSS -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
@@ -24,6 +24,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            background-color: gray;
+        }
+    </style>
 </head>
 <body>
     <div id="wrapper" class="toggled">
@@ -32,10 +38,13 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="margin-bottom: 10px;">Toggle Menu</a>
                 <div class="row">
                     <div class="col-lg-12">
-
+                        <div class="jumbotron">
+                            <div class="h1">Welcome to Dashboard</div>
+                            <p>I was too lazy to make an actual dashboard with some fancy design and statistics. Sorry about that.</p>
+                        </div>
                     </div>
                 </div>
             </div>

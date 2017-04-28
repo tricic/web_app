@@ -91,7 +91,7 @@
                                     <label>Article ID:</label>
                                     <input type="number" name="id" placeholder="Enter article ID" class="form-control" required>
                                     <br>
-                                    <input type="submit" value="Submit" class="btn btn-primary btn-block">
+                                    <input type="submit" value="Delete article" class="btn btn-primary btn-block">
                                 </div> 
                             </form>
 

@@ -2,6 +2,7 @@
 class Database {
     // Properties
     public static $conn = null;
+    public static $error;
 
     // Connection methods
     public static function checkConnection() {
@@ -20,6 +21,7 @@ class Database {
 
     public static function closeConnection() {
         unset(self::$conn);
+        unset(self::$error);
     }
 
     // Query methods
@@ -31,6 +33,7 @@ class Database {
         if(@$result->num_rows) {
             return $result->fetch_all(MYSQLI_ASSOC);
         } else {
+            self::$error = self::$conn->error;
             return false;
         }
     }
@@ -42,6 +45,7 @@ class Database {
         if(self::$conn->query($query) && self::$conn->affected_rows) {
             return true;
         } else {
+            self::$error = self::$conn->error;
             return false;
         }
     }

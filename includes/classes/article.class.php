@@ -4,7 +4,27 @@ require_once('database.class.php');
 class Article extends Database {
 
     public static function insert($user_id, $category_id, $img_url, $title, $content) {
+        self::checkConnection();
+
+        $content = self::$conn->real_escape_string($content);
+        $title = self::$conn->real_escape_string($title);
+
         $query = "INSERT INTO article (user_id, category_id, img_url, title, content) VALUES ($user_id, $category_id, '$img_url', '$title', '$content')";
+
+        if(self::queryExec($query)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function update($article_id, $category_id, $img_url, $title, $content) {
+        self::checkConnection();
+
+        $content = self::$conn->real_escape_string($content);
+        $title = self::$conn->real_escape_string($title);
+
+        $query = "UPDATE article SET category_id = $category_id, img_url = '$img_url', title = '$title', content = '$content' WHERE article_id = $article_id";
 
         if(self::queryExec($query)) {
             return true;
@@ -92,12 +112,12 @@ class Article extends Database {
     public static function outputRow($article) { ?>
         <a href="article.php?id=<?= $article['article_id'] ?>">
             <div class="row well well-sm">
-                <div class="col-xs-2">
-                    <img src="<?= $article['img_url'] ?>" alt="placeholder" class="img-rounded" style="height: 100px;">
-                </div>
-                <div class="col-xs-10">
+                <div class="col-xs-12">
+                    <img src="<?= $article['img_url'] ?>" alt="placeholder" class="img-rounded" style="max-height: 100px; display: inline-block; margin-right: 10px;">
+                    <div style="display: inline-block;">
                         <h4><?= $article['title'] ?></h4>
                         <span>- <?= $article['article_date']?><span>
+                    </div>
                 </div>
             </div>
         </a>

@@ -56,7 +56,7 @@
                                     <label>Search comments:</label>
                                     <input type="text" name="text" placeholder="Enter comment part..." class="form-control">
                                     <br>
-                                    <label>Comment username:</label>
+                                    <label>Comment author (username):</label>
                                     <input type="text" name="username" placeholder="Leave blank to search all users..." class="form-control">
                                     <br>
                                     <input type="submit" value="Get results" class="btn btn-primary btn-block" onclick="ajax_search_comments(text.value, username.value)">
